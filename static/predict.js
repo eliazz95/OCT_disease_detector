@@ -16,20 +16,21 @@ $("#image-selector").on('change', function () {
 let model;
 $("#load-button").on('click', async () => {
     model = $("#model-selector").val();
-    $(".progress-bar").show();
+    $(".first-pbar").show();
     //model = undefined;
-    model = await tf.loadLayersModel(`https://tfjs-model.herokuapp.com//tfjs-models/${model}/model.json`);
-    $(".progress-bar").hide();
+    const currUrl = $(location).attr('href')
+    model = await tf.loadLayersModel(`${currUrl}/tfjs-models/${model}/model.json`);
+    $(".first-pbar").hide();
 })
 
 
 $("#predict-button").on('click', async () => {
+    $(".second-pbar").show();
     let image = $("#selected-image").get(0)
     let modelName = $("#model-selector").val()
     let tensor = preprocessImage(image, modelName)
     
     let predictions = await model.predict(tensor).data()
-    $("#hide").hide();
     let top5 = Array.from(predictions)
         .map(function (p,i) {
             return {
@@ -44,6 +45,7 @@ $("#predict-button").on('click', async () => {
         top5.forEach(function (p){
             $("#prediction-list").append(`<li>${p.className}: ${p.probability.toFixed(6)} </li>`)
         })
+    $(".second-pbar").hide();
 })
 
 function preprocessImage(image, modelName) {

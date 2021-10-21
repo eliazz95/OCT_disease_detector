@@ -22,11 +22,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated mb-2" style="display: none;">Loading Model</div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-6">
                     <select class="custom-select" id="model-selector">
                         <option selected disabled>Select model</option>
@@ -38,6 +33,11 @@
                     <button id="load-button" class="btn btn-dark">Load model</button>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated mb-2 first-pbar" style="display: none;">Loading Model</div>
+                </div>
+            </div>
             <hr>
             <div class="row">
                 <div class="col-6">
@@ -45,6 +45,11 @@
                 </div>
                 <div class="col-6">
                     <button id="predict-button" class="btn btn-dark float-end">Predict</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated mb-2 second-pbar" style="display: none;">Predicting...</div>
                 </div>
             </div>
             <hr>
