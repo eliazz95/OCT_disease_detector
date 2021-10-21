@@ -25,11 +25,11 @@ $("#load-button").on('click', async () => {
 
 
 $("#predict-button").on('click', async () => {
-    $(".second-pbar").show();
     let image = $("#selected-image").get(0)
     let modelName = $("#model-selector").val()
     let tensor = preprocessImage(image, modelName)
     
+    $(".second-pbar").show();
     let predictions = await model.predict(tensor).data()
     let top5 = Array.from(predictions)
         .map(function (p,i) {
