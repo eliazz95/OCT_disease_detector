@@ -18,7 +18,7 @@ $("#load-button").on('click', async () => {
     model = $("#model-selector").val();
     $(".progress-bar").show();
     //model = undefined;
-    model = await tf.loadLayersModel(`http://localhost:3000/tfjs-models/${model}/model.json`);
+    model = await tf.loadLayersModel(`https://tfjs-model.herokuapp.com//tfjs-models/${model}/model.json`);
     $(".progress-bar").hide();
 })
 
