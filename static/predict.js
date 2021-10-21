@@ -29,7 +29,6 @@ $("#predict-button").on('click', async () => {
     let modelName = $("#model-selector").val()
     let tensor = preprocessImage(image, modelName)
     
-    $(".second-pbar").show();
     let predictions = await model.predict(tensor).data()
     let top5 = Array.from(predictions)
         .map(function (p,i) {
@@ -45,7 +44,6 @@ $("#predict-button").on('click', async () => {
         top5.forEach(function (p){
             $("#prediction-list").append(`<li>${p.className}: ${p.probability.toFixed(6)} </li>`)
         })
-    $(".second-pbar").hide();
 })
 
 function preprocessImage(image, modelName) {
