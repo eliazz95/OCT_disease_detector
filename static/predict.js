@@ -34,11 +34,11 @@ $("#predict-button").on('click', async () => {
         .map(function (p,i) {
             return {
                 probability: p,
-                className: IMAGENET_CLASSES[i]
+                className: OCT_CLASSES[i]
             }
         }).sort(function (a,b) {
             return b.probability - a.probability
-        }).slice(0, 5)
+        }).slice(0, 4)
     
         $("#prediction-list").empty()
         top5.forEach(function (p){
@@ -62,6 +62,12 @@ function preprocessImage(image, modelName) {
     }
     else if (modelName === "MobileNet") {
         let offset = tf.scalar(127.5);
+        return tensor.sub(offset)
+            .div(offset)
+            .expandDims();
+    }
+    else if (modelName === "OCT_VGG16") {
+        let offset = tf.scalar(255);
         return tensor.sub(offset)
             .div(offset)
             .expandDims();
