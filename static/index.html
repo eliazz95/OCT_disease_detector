@@ -4,76 +4,230 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict image app</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>OCT Disease Detector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
     
 </head>
 <body>
+    <nav class="navbar navbar-light bg-light border-3 border-primary border-bottom">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1 mx-auto">OCT Disease Detector</span>
+        </div>
+    </nav>
     <main>
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12 text-center mb-3">
-                    <h2 class="">Image Object Detector</h2>
-                    <p>This is an image object detector! Start by choosing a model from the dropdown and then press "Load model". After the loading has completed, upload any image of your choice and then hit the 
-                        predict button to classify what is in the image.
-                    </p>
+        <div class="container mt-5 mb-5">
+            <div class="row g-4">
+                <div class="col-md-4 d-flex">
+                    <div class="card custom-shadow rounded-5 flex-fill">
+                        <div class="card-header alert alert-success d-flex align-items-center mb-2" style="padding: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                              <div>
+                                About
+                              </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Welcome!</h5>
+                            <p class="card-text">
+                                This is an OCT disease detector! The detector is pre-loaded with a trained model. Upload any image of your choice and then hit the 
+                                predict button to classify what disease is in the image.
+                            </p>
+                            <p>Good luck!</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <select class="custom-select" id="model-selector">
-                        <option selected disabled>Select model</option>
-                        <option>MobileNet</option>
-                        <option>OCT_VGG16</option>
-                    </select>
+                <div class="col-md-4 d-flex">
+                    <div class="card custom-shadow rounded-5 flex-fill">
+                        <div class="card-header alert alert-primary d-flex align-items-center mb-2" style="padding: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                              <div>
+                                Info
+                              </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Diseases / Classes</h5>
+                            <p class="card-text">
+                                There are currently only three diseases/classes and healthy eyes that this web app can detect. These include:
+                            </p>
+                            <ol style="list-style-type: none;">
+                                <li>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success rounded-pill me-3" style="width: 10px; height: 10px;"></div>
+                                        <h6 class="fw-semi-bold mb-0">Choroidal Neovascularization (CNV)</h6>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning rounded-pill me-3" style="width: 10px; height: 10px;"></div>
+                                        <h6 class="fw-semi-bold mb-0">Diabetic macular edema (DME)</h6>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary rounded-pill me-3" style="width: 10px; height: 10px;"></div>
+                                        <h6 class="fw-semi-bold mb-0">Drusen</h6>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-danger rounded-pill me-3" style="width: 10px; height: 10px;"></div>
+                                        <h6 class="fw-semi-bold mb-0">Normal (healthy)</h6>
+                                    </div>
+                                </li>
+                              </ol>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <button id="load-button" class="btn btn-dark">Load model</button>
+                <div class="col-md-4 d-flex">
+                    <div class="card custom-shadow rounded-5 flex-fill">
+                        <div class="card-header alert alert-primary d-flex align-items-center mb-2" style="padding: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                            </svg>
+                              <div>
+                                Info
+                              </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Images</h5>
+                            <p class="card-text">
+                                Please note that only grayscale OCT images with either of the three dieases or a healthy eye will give a correct prediction. The use of any other images or low quality images
+                                will result in a error message.
+                            </p>
+                            <p>Accepted file types:</p>
+                            <div class="row ps-5">
+                                <div class="col-md-4"><code>.jpeg</code></div>
+                                <div class="col-md-4"><code>.jpg</code></div>
+                                <div class="col-md-4"><code>.png</code></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated mt-2 first-pbar" style="display: none;">Loading Model</div>
+                <hr class="mt-5">
+                <div class="col-md-12 d-flex">
+                    <div class="card custom-shadow rounded-5 flex-fill">
+                        <div class="card-header bg-light">
+                            Image
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Image Selector</h5>
+                            <p class="card-text">
+                                Select an OCT image that meets the demands stated in the info blocks.
+                            </p>
+                            <div class="row mt-5">
+                                <div class="col-6">
+                                    <input id="image-selector" class="form-control" type="file" accept=".png, .jpg, .jpeg">
+                                </div>
+                                <!--<div class="col-6">
+                                    <button id="image-button" class="btn btn-primary">Load image</button>
+                                </div>-->
+                                <div class="col-6">
+                                    <button id="predict-button" class="btn btn-primary">Predict</button>
+                                </div>
+                                <div id="pred-pbar" class="progress-bar progress-bar-striped progress-bar-animated mt-3" style="display: none;">Predicting...</div>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-6">
-                    <input id="image-selector" class="form-control border-0" type="file">
+                <div class="col-md-7">
+                    <div class="card custom-shadow rounded-5">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Image</h5>
+                            <div id="spinner" class="text-center" style="width: 100%; height: 400px; position:relative; display:none;">
+                                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem; top: 45%; position:absolute;" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <img id="selected-image" class="ml-3" src="images/placeholder-1.png" style="width: 100%;"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <button id="predict-button" class="btn btn-dark float-end">Predict</button>
-                </div>
-            </div>
-            <div class="row">
-                <!--<div class="col-12">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated mb-2 second-pbar" style="display: none;">Predicting...</div>
-                </div>-->
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col">
-                    <h2 class="ml-3">Predictions</h2>
-                    <ol id="prediction-list"></ol>
-                </div>
-            </div>
-            <hr>
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="ml-3">Image</h2>
-                </div>
-                <div class="col-6">
-                    <img id="selected-image" class="ml-3" src="" style="width: 100%;"/>
+                <div class="col-md-5">
+                    <div class="card custom-shadow rounded-5">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Predictions</h5>
+                            <!--<button id="predict-button" class="btn btn-primary mb-3">Predict</button>
+                            <div id="pred-pbar" class="progress-bar progress-bar-striped progress-bar-animated mt-3" style="display: none;">Predicting...</div>-->
+
+                            <div id="pred-msg" style="display: none;" class="alert alert-danger alert-msg mt-5" role="alert">
+                                <h4 class="alert-heading">Something has gone wrong...</h4>
+                                <p>Possible reasons for this error:</p>
+                                <ul>
+                                    <li>Quality is poor</li>
+                                    <li>The image is not an OCT image</li>
+                                    <li>The model is simply too uncertain of what is in the image</li>
+                                  </ul>
+                                <hr>
+                                <p class="mb-0">Try uploading another image or one with better quality.</p>
+                            </div>
+                        </div>
+                        <table class="table table-hover table-borderless mb-0">
+                            <thead class="bg-light">
+                                <tr class="border-bottom border-top">
+                                    <th class="text-start" scope="col-6">NAME</th>
+                                    <th scope="col text-end">ACCURACY (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pred-table">
+                                <tr class="border-bottom">
+                                    <td class="text-start fw-bold">CNV</td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center float-end">
+                                            <div class="progress me-3 rounded-3" style="height: 6px; width: 100px;">
+                                                <div class="progress-bar rounded-pill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="ms-2">0%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td class="text-start fw-bold">DME</td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center float-end">
+                                            <div class="progress me-3 rounded-3" style="height: 6px; width: 100px;">
+                                                <div class="progress-bar rounded-pill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="ms-2">0%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td class="text-start fw-bold">DRUSEN</td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center float-end">
+                                            <div class="progress me-3 rounded-3" style="height: 6px; width: 100px;">
+                                                <div class="progress-bar rounded-pill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="ms-2">0%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <td class="text-start fw-bold">NORMAL</td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center float-end">
+                                            <div class="progress me-3 rounded-3" style="height: 6px; width: 100px;">
+                                                <div class="progress-bar rounded-pill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="ms-2">0%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-node@3.9.0/dist/index.min.js"></script>-->
-    <!--<script src="imagenet_classes.js"></script>-->
-    <script src="oct_classes.js"></script>
-    <script src="predict.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="js/oct_classes.js"></script>
+    <script src="js/predict.js"></script>
 </body>
 </html>
